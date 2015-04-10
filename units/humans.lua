@@ -1,9 +1,3 @@
-local Civilian:New {
-    customparams = {
-        civilian = true,
-    }
-}
-
 local Dude = Civilian:New{
 	name				= "PlaceHolderDude",
 }
