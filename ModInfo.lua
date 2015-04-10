@@ -1,10 +1,10 @@
 local modinfo = {
-	name = "ABC - C(hili UI Framework)",
-	shortname = "C",
-	game = "SpringABC",
-	shortgame = "ABC",
-	description = "Game with directory structure + major files + Chili UI Framework",
-	url = "http://www.springrts.com/wiki/SpringABC",
+    game = "Corruption Warmup",
+    shortgame = "CW",
+	game = "Corruption Warmup",
+	shortgame = "CW",
+	description = "Corruption Warmup description (^_^)",
+	url = "https://github.com/SpringCabal/Corruption",
 	
 	modtype = "1",
 
