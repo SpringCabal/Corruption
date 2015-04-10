@@ -1,8 +1,14 @@
-local Dude = BaseHuman:New{
+local Civilian:New {
+    customparams = {
+        civilian = true,
+    }
+}
+
+local Dude = Civilian:New{
 	name				= "PlaceHolderDude",
 }
 
-local Dudette = BaseHuman:New{
+local Dudette = Civilian:New{
 	name				= "PlaceHolderDudette",
 }
 
