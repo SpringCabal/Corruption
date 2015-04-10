@@ -36,7 +36,14 @@ local Civilian = BaseHuman:New{
     }
 }
 
+local Zombie = BaseHuman:New {
+    customparams = {
+        zombie = true,
+    }
+}
+
 return {
 	BaseHuman = BaseHuman,
     Civilian = Civilian,
+    Zombie = Zombie,
 }

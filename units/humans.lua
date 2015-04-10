@@ -1,18 +1,45 @@
 local Dude = Civilian:New{
-	name				= "PlaceHolderDude",
+	name				= "Dude",
 }
 
 local Dudette = Civilian:New{
-	name				= "PlaceHolderDudette",
+	name				= "Dudette",
 }
 
-local Engineer = BaseHuman:New{
-	name				= "PlaceHolderDudette",
-	objectName				= "<NAME>.s3o",
+local Kid = Civilian:New {
+    name                = "Kid",
+    customparams = {
+        kid = true,
+    }
 }
+
+local ZombieDude = Zombie:New{
+	name				= "ZombieDude",
+}
+
+local ZombieKid = Zombie:New {
+    name                = "ZombieKid",
+    customparams = {
+        kid = true,
+    }
+}
+--[[
+local Player = BaseHuman:New {
+    name                = "Player",
+    customparams = {
+        player = true,
+    }
+}]]
+
+-- local Engineer = BaseHuman:New{
+-- 	name				= "PlaceHolderDudette",
+-- 	objectName				= "<NAME>.s3o",
+-- }
 
 return lowerkeys({
 	Dude = Dude,
 	Dudette = Dudette,
-	Engineer = Engineer,
+    Kid = Kid,
+    ZombieDude = ZombieDude,
+    ZombieKid = ZombieKid,
 })
