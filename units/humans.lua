@@ -17,6 +17,10 @@ local ZombieDude = Zombie:New{
 	name				= "ZombieDude",
 }
 
+local ZombieDudette = Zombie:New{
+	name				= "ZombieDudette",
+}
+
 local ZombieKid = Zombie:New {
     name                = "ZombieKid",
     customparams = {
