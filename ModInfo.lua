@@ -1,6 +1,6 @@
 local modinfo = {
-    game = "Corruption Warmup",
-    shortgame = "CW",
+    name = "Corruption Warmup",
+    shortname = "CW",
 	game = "Corruption Warmup",
 	shortgame = "CW",
 	description = "Corruption Warmup description (^_^)",
