@@ -9,14 +9,14 @@ local function RecursiveReplaceStrings(t, name, replacedMap)
 			t[k] = v:gsub("<NAME>", name)
 		end
 		if (type(v) == 'table') then
-			RecursiveReplaceStrings(v, name, side, replacedMap)
+			RecursiveReplaceStrings(v, name, replacedMap)
 		end
 	end 
 end
 
 local function ReplaceStrings(t, name)
 	local replacedMap = {}
-	RecursiveReplaceStrings(t, name,replacedMap)
+	RecursiveReplaceStrings(t, name, replacedMap)
 end
 
 -- Process ALL the units!

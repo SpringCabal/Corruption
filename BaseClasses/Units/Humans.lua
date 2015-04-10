@@ -30,7 +30,7 @@ local BaseHuman = Unit:New{
 	upright				= true,
 }
 
-local Civilian = BaseHuman:New {
+local Civilian = BaseHuman:New{
     customparams = {
         civilian = true,
     }
