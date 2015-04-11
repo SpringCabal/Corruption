@@ -1,8 +1,8 @@
-local Dude = Civilian:New{
+local Dude = Civilian:New {
 	name				= "Dude",
 }
 
-local Dudette = Civilian:New{
+local Dudette = Civilian:New {
 	name				= "Dudette",
 }
 
@@ -13,11 +13,16 @@ local Kid = Civilian:New {
     }
 }
 
-local ZombieDude = Zombie:New{
+local ZombieDude = Zombie:New {
 	name				= "ZombieDude",
+    script				= "zombiedude.lua",
+--     objectName          = "zombiedude.blend",
+    weapons = {
+        { name = "Claw "},
+    },
 }
 
-local ZombieDudette = Zombie:New{
+local ZombieDudette = Zombie:New {
 	name				= "ZombieDudette",
 }
 
@@ -27,13 +32,13 @@ local ZombieKid = Zombie:New {
         kid = true,
     }
 }
---[[
+
 local Player = BaseHuman:New {
     name                = "Player",
     customparams = {
         player = true,
     }
-}]]
+}
 
 -- local Engineer = BaseHuman:New{
 -- 	name				= "PlaceHolderDudette",
@@ -44,6 +49,8 @@ return lowerkeys({
 	Dude = Dude,
 	Dudette = Dudette,
     Kid = Kid,
+    Player = Player,
     ZombieDude = ZombieDude,
+    ZombieDudette = ZombieDudette,
     ZombieKid = ZombieKid,
 })

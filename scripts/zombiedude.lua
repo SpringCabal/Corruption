@@ -1,31 +1,25 @@
 
-include "toolKit.lua"
-
 function script.HitByWeapon(x, z, weaponDefID, damage)
 end
 
 --center=piece"center"
--- empty=piece"empty"
+empty=piece"Empty"
 
 function script.Create()
-    generatepiecesTableAndArrayCode(unitID)
 end
 
-function script.Killed(recentDamage,_)
-    suddenDeathV(recentDamage)
+function script.Killed(recentDamage, _)
     return 1
 end
 
 
 ----aiming & fire weapon
 function script.AimFromWeapon1() 
-    return center 
+    return empty 
 end
 
-
-
 function script.QueryWeapon1() 
-    return center
+    return empty
 end
 
 function script.AimWeapon1(Heading, pitch)
@@ -54,9 +48,9 @@ function script.Deactivate()
 end
 
 function script.QueryBuildInfo()
-    return center
+    return empty 
 end
 
 function script.QueryNanoPiece()
-    return center
+    return empty
 end

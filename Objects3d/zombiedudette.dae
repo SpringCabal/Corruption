@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.73.9 commit date:2015-02-27, commit time:22:02, hash:fff8a51</authoring_tool>
     </contributor>
-    <created>2015-04-11T12:14:52</created>
-    <modified>2015-04-11T12:14:52</modified>
+    <created>2015-04-11T12:08:21</created>
+    <modified>2015-04-11T12:08:21</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -101,9 +101,6 @@
             </technique_common>
           </bind_material>
         </instance_geometry>
-        <node id="Empty" name="Empty" type="NODE">
-          <matrix sid="transform">1 0 0 0.0733467 0 1 0 -12.08452 0 0 1 -5.227377 0 0 0 1</matrix>
-        </node>
       </node>
     </visual_scene>
   </library_visual_scenes>
