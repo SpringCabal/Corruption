@@ -72,7 +72,7 @@ local params = {
 	--civilian behavior settings
 		--how far around them civilians are aware of things happening 
 		--(like civilians dying, zombies approaching, etc).
-	CIV_AWARE_RADIUS			= 450,
+	CIV_AWARE_RADIUS			= 100,
 		--how long civvies run from zombies before reevaluating
 	CIV_FEAR_DURATION			= 5,
 		--how long civvies run from a team that shot at them
