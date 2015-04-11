@@ -46,6 +46,13 @@ local Player = BaseHuman:New {
     }
 }
 
+local Exorcist = BaseHuman:New {
+    name                = "Exorcist",
+    customparams = {
+        player = true,
+    }
+}
+
 -- local Engineer = BaseHuman:New{
 -- 	name				= "PlaceHolderDudette",
 -- 	objectName				= "<NAME>.s3o",
@@ -56,6 +63,7 @@ return lowerkeys({
 	Dudette = Dudette,
     Kid = Kid,
     Player = Player,
+    Exorcist = Exorcist,
     ZombieDude = ZombieDude,
     ZombieDudette = ZombieDudette,
     ZombieKid = ZombieKid,
