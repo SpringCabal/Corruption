@@ -20,8 +20,7 @@ mass=180020,
 upRight=true,
 blocking=false,
 pushResistant=true,
-Acceleration = 0.0000001,
-BrakeRate = 0.0001,
+
 FootprintX = 3,
 FootprintZ = 3,
 
@@ -29,7 +28,6 @@ FootprintZ = 3,
 MaxSlope = 90,
 MaxVelocity = 0.000001,
 MaxWaterDepth = 55,
-MovementClass = "Default2x2",
 TurnRate = 1,
 
 sightDistance = 80,
