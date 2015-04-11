@@ -28,6 +28,7 @@ FootprintZ = 3,
 MaxSlope = 90,
 MaxVelocity = 0.000001,
 MaxWaterDepth = 55,
+MovementClass = "Default2x2",
 TurnRate = 1,
 
 sightDistance = 80,

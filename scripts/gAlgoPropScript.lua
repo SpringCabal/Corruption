@@ -30,7 +30,7 @@ end
 hideT(pod)
 hideT(bloks)
 dist=16
-disto=28
+disto=16
 cgPosX,cgPosY,cgPosZ=0,0,0
 
 function byNr(i)
