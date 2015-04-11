@@ -45,5 +45,6 @@ return lowerkeys({
 	Dudette = Dudette,
     Kid = Kid,
     ZombieDude = ZombieDude,
+    ZombieDudette = ZombieDudette,
     ZombieKid = ZombieKid,
 })
