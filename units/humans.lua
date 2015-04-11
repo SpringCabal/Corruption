@@ -24,13 +24,19 @@ local ZombieDude = Zombie:New {
 
 local ZombieDudette = Zombie:New {
 	name				= "ZombieDudette",
+    weapons = {
+        { name = "Claw"},
+    },
 }
 
 local ZombieKid = Zombie:New {
     name                = "ZombieKid",
     customparams = {
         kid = true,
-    }
+    },
+    weapons = {
+        { name = "Claw"},
+    },
 }
 
 local Player = BaseHuman:New {

@@ -205,7 +205,7 @@ function gadget:GameFrame(n)
 --         SendToUnsynced('allytogaia')
 --     end
 
-    if n % 30 ~= 0 then
+    if n % 15 ~= 0 then
         return
     end
 
