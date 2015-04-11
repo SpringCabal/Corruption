@@ -1,4 +1,4 @@
-include "suddenDeath.lua"
+
 include "toolKit.lua"
 
 function script.HitByWeapon ( x, z, weaponDefID, damage ) 
