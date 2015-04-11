@@ -16,11 +16,6 @@ if (gadgetHandler:IsSyncedCode()) then
 --------------------------------------------------------------------------------
 --  SYNCED
 --------------------------------------------------------------------------------
-if (Spring.GetModOptions) then
-  modOptions = Spring.GetModOptions()
-end
-
-
 
 
 local CMD_FIRESTATE		=	CMD.FIRE_STATE
@@ -84,7 +79,7 @@ local LOG_LEVEL = LOG.DEBUG
 
 local function Flee(scaryX, scaryZ, unitID, attackerTeam) --RUN AWWAAAAAY!
 	Spring.SetUnitAlwaysVisible(unitID, true)
-	--Spring.Log(LOG_SECTION, LOG_LEVEL,"Fleeee", unitID, "fleee!")
+	Spring.Log(LOG_SECTION, LOG_LEVEL,"Fleeee", unitID, "fleee!")
 	scaredUnits[unitID] = CIV_FEAR_DURATION
 	local civX,_,civZ = GetUnitPosition(unitID)
 	local xDest
@@ -240,21 +235,21 @@ function gadget:GameFrame(n)
                 Spring.Log(LOG_SECTION, LOG_LEVEL,"aiee a zombie!")
                 Flee(zomX, zomZ, unitID, zombieTeam)
             else
-                local guardTeam = GetUnitTeam(nearestEnemy)
-                if (scaryTeams[guardTeam]) then
-                    if (scaryTeams[guardTeam] > 0) then
-                        local enemyX,_,enemyZ = GetUnitPosition(nearestEnemy)
-                        Spring.Log(LOG_SECTION, LOG_LEVEL,"they're the ones who shot at us!")
-                        Flee(enemyX, enemyZ, unitID, guardTeam)
-                    else
-                        --TODO: update this to check for a team's actual retreat zone
-                        local px, py, pz = GetTeamStartPosition(guardTeam)
-                        if scaredUnits[unitID] == 0 then
-                            GiveOrderToUnit(unitID, CMD_MOVE, {px, py, pz}, {})
-                            RescuedCheck(unitID, civX, civZ, guardTeam)
-                        end
-                    end
-                end
+--                 local guardTeam = GetUnitTeam(nearestEnemy)
+--                 if (scaryTeams[guardTeam]) then
+--                     if (scaryTeams[guardTeam] > 0) then
+--                         local enemyX,_,enemyZ = GetUnitPosition(nearestEnemy)
+--                         Spring.Log(LOG_SECTION, LOG_LEVEL,"they're the ones who shot at us!")
+--                         Flee(enemyX, enemyZ, unitID, guardTeam)
+--                     else
+--                         --TODO: update this to check for a team's actual retreat zone
+--                         local px, py, pz = GetTeamStartPosition(guardTeam)
+--                         if scaredUnits[unitID] == 0 then
+--                             GiveOrderToUnit(unitID, CMD_MOVE, {px, py, pz}, {})
+--                             RescuedCheck(unitID, civX, civZ, guardTeam)
+--                         end
+--                     end
+--                 end
             end
         end
     end
