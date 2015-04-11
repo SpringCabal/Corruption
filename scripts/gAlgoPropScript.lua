@@ -35,7 +35,7 @@ cgPosX,cgPosY,cgPosZ=0,0,0
 
 function byNr(i)
 
-if math.random(0,1)==1 then return 0,dist,0 end
+if lib_deMaRa()==true then return 0,dist,0 end
 if i==1 then return disto,0,0 end
 if i==2 then return 0,0,disto end
 if i==3 then return -1*disto,0,0 end
@@ -98,8 +98,8 @@ end
 nrOfSpots=5
 
 function addABrick()
-d=math.floor(math.random(1,table.getn(bloks)))
-getAPod=math.floor(math.random(1,nrOfSpots))
+d=math.floor(lib_deMaRaVal(1,table.getn(bloks)))
+getAPod=math.floor(lib_deMaRaVal(1,nrOfSpots))
 
 moveCGAndAdPods(freeSpots[getAPod][1],freeSpots[getAPod][2],freeSpots[getAPod][3],getAPod,d)
 end
