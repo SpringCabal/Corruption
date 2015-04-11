@@ -18,7 +18,7 @@ local ZombieDude = Zombie:New {
     script				= "zombiedude.lua",
 --     objectName          = "zombiedude.blend",
     weapons = {
-        { name = "Claw "},
+        { name = "Claw"},
     },
 }
 
