@@ -3,7 +3,7 @@ local MeleeBase = Weapon:New {
     impactOnly              = true,
     noSelfDamage            = true,
     
-    range                   = 100,
+    range                   = 20,
     --soundStart              = [[BladeSwing]],
     --rgbColor                = "1 0.25 0",
 }
