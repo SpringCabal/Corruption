@@ -29,7 +29,7 @@ bloks[i]=piece(temp)
 end
 hideT(pod)
 hideT(bloks)
-dist=16
+dist=26
 disto=16
 cgPosX,cgPosY,cgPosZ=0,0,0
 
@@ -97,9 +97,15 @@ end
 
 nrOfSpots=5
 
+function clamp(min, val, max)
+if val < min then return min end
+if val > max then return max end
+return val
+end
+
 function addABrick()
-d=math.floor(lib_deMaRaVal(1,table.getn(bloks)))
-getAPod=math.floor(lib_deMaRaVal(1,nrOfSpots))
+d=clamp(1,lib_deMaRaVal(table.getn(bloks)),table.getn(bloks))
+getAPod=clamp(1,lib_deMaRaVal(nrOfSpots),nrOfSpots)
 
 moveCGAndAdPods(freeSpots[getAPod][1],freeSpots[getAPod][2],freeSpots[getAPod][3],getAPod,d)
 end
@@ -113,7 +119,7 @@ end
 
 function script.Create()
 Hide(cg)
-
+Move(center,y_axis,15,0)
 	
 for i=1,5,1 do
 Hide(pod[i])

@@ -63,11 +63,11 @@ end
   local itterator=GG.RandSeedTable.itterator
 	if not GG.RandSeedTable then
 	setUpFirstRandom()
-	GG.RandSeedTable.itterator=math.max(1,(itterator+1)%#RandSeedTable)
-	return math.ceil((D[GG.RandSeedTable.itterator]/42)*valrange)
+	GG.RandSeedTable.itterator=math.max(1,(itterator+1)%#GG.RandSeedTable)
+	return math.ceil((GG.RandSeedTable[GG.RandSeedTable.itterator]/42)*valrange)
 	else
-	GG.RandSeedTable.itterator=math.max(1,(itterator+1)%#RandSeedTable)
-	return math.ceil((D[GG.RandSeedTable.itterator]/42)*valrange)
+	GG.RandSeedTable.itterator=math.max(1,(itterator+1)%#GG.RandSeedTable)
+	return math.ceil((GG.RandSeedTable[GG.RandSeedTable.itterator]/42)*valrange)
 	end
  end
 
@@ -79,7 +79,7 @@ end
 
 	lib_setUpFirstRandom()
 	GG.RandSeedTable.itterator=GG.RandSeedTable.itterator+1
-	GG.RandSeedTable.itterator=math.max(1,(GG.RandSeedTable.itterator)%#GG.RandSeedTable.itterator)
+	GG.RandSeedTable.itterator=math.max(1,(GG.RandSeedTable.itterator)%#GG.RandSeedTable)
 	return GG.RandSeedTable[GG.RandSeedTable.itterator]==1
 	else
 		GG.RandSeedTable.itterator=GG.RandSeedTable.itterator+1
