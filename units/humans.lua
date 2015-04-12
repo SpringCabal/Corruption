@@ -1,12 +1,10 @@
 local Dude = Civilian:New {
-	name				= "Dude",
+    name                = "Dude",
     maxDamage           = 300,
-    collisionVolumeScales		= [[50 50 50]],
-    collisionVolumeOffsets	= [[0 25 0]],
 }
 
 local Dudette = Civilian:New {
-	name				= "Dudette",
+    name                = "Dudette",
     maxDamage           = 300,
 }
 
@@ -19,8 +17,8 @@ local Kid = Civilian:New {
 }
 
 local ZombieDude = Zombie:New {
-	name				= "ZombieDude",
-    script				= "zombiedude.lua",
+    name                = "ZombieDude",
+    script              = "zombiedude.lua",
     maxDamage           = 500,
 --     objectName          = "zombiedude.blend",
     weapons = {
@@ -29,7 +27,7 @@ local ZombieDude = Zombie:New {
 }
 
 local ZombieDudette = Zombie:New {
-	name				= "ZombieDudette",
+    name                = "ZombieDudette",
     weapons = {
         { name = "Claw"},
     },
@@ -59,13 +57,13 @@ local Exorcist = BaseHuman:New {
 }
 
 -- local Engineer = BaseHuman:New{
--- 	name				= "PlaceHolderDudette",
--- 	objectName				= "<NAME>.s3o",
+--  name                = "PlaceHolderDudette",
+--  objectName              = "<NAME>.s3o",
 -- }
 
 return lowerkeys({
-	Dude = Dude,
-	Dudette = Dudette,
+    Dude = Dude,
+    Dudette = Dudette,
     Kid = Kid,
     Exorcist = Exorcist,
     ZombieDude = ZombieDude,
