@@ -6,6 +6,16 @@ local Claw = MeleeBase:New {
 	},
 }
 
+local Staff = MeleeBase:New {
+	name				    = "Staff",
+	reloadtime              = 0.8,
+    range                   = 40,
+	damage					= {
+		default = 50.1,
+	},
+}
+
 return lowerkeys({
 	Claw = Claw,
+    Staff = Staff,
 })

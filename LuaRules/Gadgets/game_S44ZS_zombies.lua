@@ -3,7 +3,7 @@ function gadget:GetInfo()
     return {
         name      = "Zombie behavior",
         desc      = "Handles zombie behavior for Corruption",
-        author    = "B. Tyler (Nemo), gajop",
+        author    = "gajop",
         date      = "April 2015",
         license   = "LGPL v2.1 or later",
         layer     = 1,
@@ -17,21 +17,6 @@ if (gadgetHandler:IsSyncedCode()) then
 --  SYNCED
 --------------------------------------------------------------------------------
 
-
-local CMD_FIRESTATE		=	CMD.FIRE_STATE
-local CMD_MOVESTATE		=	CMD.MOVE_STATE
-local CMD_GUARD			=	CMD.GUARD
-local CMD_MOVE			=	CMD.MOVE
-local CMD_STOP			=	CMD.STOP
-
-local GetTeamStartPosition	=	Spring.GetTeamStartPosition
-local GetUnitNearestEnemy	=	Spring.GetUnitNearestEnemy
-local GetUnitPosition		=	Spring.GetUnitPosition
-local GetUnitTeam			=	Spring.GetUnitTeam
-local GetUnitDefID			=	Spring.GetUnitDefID
-
-local GiveOrderToUnit			=	Spring.GiveOrderToUnit
-
 local function InRadius(x1, z1, x2, z2, radius)
     return (math.abs(x1-x2) < radius or math.abs(z1-z1) < radius)
 end
@@ -44,11 +29,12 @@ local zombies = {}
 ----------------------------
 ---Call ins
 ----------------------------
-function gadget:UnitDamaged(unitID, unitDefID, unitTeam, _, _, _, _, attackerID, _, attackerTeamID)
+function gadget:UnitDamaged(unitID, unitDefID, unitTeamID, _, _, _, _, attackerID, _, attackerTeamID)
     local zombie = zombies[unitID]
-    if zombie ~= nil then
+    if zombie ~= nil and unitTeamID ~= attackerTeamID then
         -- the current target poses no threat, switch to the attacker
         if zombie.target == nil or UnitDefs[zombie.target].customParams.civilian then
+            Spring.GiveOrderToUnit(unitID, CMD.FIGHT, {attackerID}, {})
             -- attack the attacker
         end
     end

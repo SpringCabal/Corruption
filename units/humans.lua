@@ -50,7 +50,10 @@ local Exorcist = BaseHuman:New {
     name                = "Exorcist",
     customparams = {
         player = true,
-    }
+    },
+    weapons = {
+        { name = "Staff"},
+    },
 }
 
 -- local Engineer = BaseHuman:New{
