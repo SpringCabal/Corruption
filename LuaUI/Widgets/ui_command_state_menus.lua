@@ -43,6 +43,7 @@ local orderColors = {
 	resurrect   = {0.0, 0.0, 1.0, 1.0},
     restore     = {0.5, 1.0, 0.2, 1.0},
     stop        = {0.4, 0.0, 0.0, 1.0},
+    leechlife   = {0.7, 0.1, 0.7, 1.0},
 }
 
 local topOrders = {
