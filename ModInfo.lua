@@ -10,6 +10,7 @@ local modinfo = {
 
 	depend = {
 		"cursors.sdz",
+        "LUPS v2014.0",
 	}
 }
 
