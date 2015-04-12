@@ -3,7 +3,7 @@ function script.HitByWeapon(x, z, weaponDefID, damage)
 end
 
 --center=piece"center"
-empty=piece"Empty"
+-- empty=piece"Empty"
 
 function script.Create()
 end
