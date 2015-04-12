@@ -1,21 +1,25 @@
 local Dude = Civilian:New {
 	name				= "Dude",
+    maxDamage           = 300,
 }
 
 local Dudette = Civilian:New {
 	name				= "Dudette",
+    maxDamage           = 300,
 }
 
 local Kid = Civilian:New {
     name                = "Kid",
-    customparams = {
+    customParams = {
         kid = true,
-    }
+    },
+    maxDamage           = 200,
 }
 
 local ZombieDude = Zombie:New {
 	name				= "ZombieDude",
     script				= "zombiedude.lua",
+    maxDamage           = 500,
 --     objectName          = "zombiedude.blend",
     weapons = {
         { name = "Claw"},
@@ -27,33 +31,29 @@ local ZombieDudette = Zombie:New {
     weapons = {
         { name = "Claw"},
     },
+    maxDamage           = 500,
 }
 
 local ZombieKid = Zombie:New {
     name                = "ZombieKid",
-    customparams = {
+    customParams = {
         kid = true,
     },
     weapons = {
         { name = "Claw"},
     },
-}
-
-local Player = BaseHuman:New {
-    name                = "Player",
-    customparams = {
-        player = true,
-    }
+    maxDamage           = 400,
 }
 
 local Exorcist = BaseHuman:New {
     name                = "Exorcist",
-    customparams = {
+    customParams = {
         player = true,
     },
     weapons = {
         { name = "Staff"},
     },
+    maxDamage           = 800,
 }
 
 -- local Engineer = BaseHuman:New{
@@ -65,7 +65,6 @@ return lowerkeys({
 	Dude = Dude,
 	Dudette = Dudette,
     Kid = Kid,
-    Player = Player,
     Exorcist = Exorcist,
     ZombieDude = ZombieDude,
     ZombieDudette = ZombieDudette,
