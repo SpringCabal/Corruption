@@ -19,28 +19,17 @@ local Kid = Civilian:New {
 local ZombieDude = Zombie:New {
     name                = "ZombieDude",
     script              = "zombiedude.lua",
-    maxDamage           = 500,
 --     objectName          = "zombiedude.blend",
-    weapons = {
-        { name = "Claw"},
-    },
 }
 
 local ZombieDudette = Zombie:New {
     name                = "ZombieDudette",
-    weapons = {
-        { name = "Claw"},
-    },
-    maxDamage           = 500,
 }
 
 local ZombieKid = Zombie:New {
     name                = "ZombieKid",
     customParams = {
         kid = true,
-    },
-    weapons = {
-        { name = "Claw"},
     },
     maxDamage           = 400,
 }
@@ -54,6 +43,7 @@ local Exorcist = BaseHuman:New {
         { name = "Staff"},
     },
     maxDamage           = 800,
+    maxVelocity        = 2,
 }
 
 -- local Engineer = BaseHuman:New{

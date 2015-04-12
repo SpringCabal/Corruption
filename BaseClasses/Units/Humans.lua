@@ -17,7 +17,7 @@ local BaseHuman = Unit:New{
 	footprintZ			= 1,
 	mass				= 50,
 	maxDamage			= 300, -- default only, <SIDE>Infantry.lua should overwrite
-	maxVelocity			= 1.6,
+	maxVelocity			= 1.5,
 	movementClass		= "KBOT_Infantry", -- TODO: --KBOT
 	repairable			= false,
 	sightDistance		= 250,
@@ -38,6 +38,11 @@ local Zombie = BaseHuman:New {
     customparams = {
         zombie = true,
     },
+    weapons = {
+        { name = "Claw"},
+    },
+    maxDamage           = 500,
+    maxVelocity         = 2.5,
 }
 
 return {
