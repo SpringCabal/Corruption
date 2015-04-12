@@ -387,18 +387,7 @@ local function loadPanels()
 	parseCmds()
 end
 
-function ConfigureLayout(xIcons, yIcons, cmdCount, commands)
-    -- interaction with widgetHandler
-	widgetHandler.commands   = commands
-	widgetHandler.commands.n = cmdCount
-	widgetHandler:CommandsChanged()
-	
-	return "", xIcons, yIcons, {}, {}, {}, {}, {}, {}, {}, {[1337]=9001}
-end
-
 function widget:Initialize()
-	--widgetHandler:ConfigureLayout(LayoutHandler) -- FIXME
-	Spring.ForceLayoutUpdate()
 	spSendCommands({'tooltip 0'})
     
     if Spring.GetGameFrame()>0 then gameStarted = true end
@@ -464,8 +453,5 @@ function widget:GameStart()
 end
 
 function widget:Shutdown()
-	--widgetHandler:ConfigureLayout(nil) --FIXME
-	Spring.ForceLayoutUpdate()
-	
 	spSendCommands({'tooltip 1'})
 end
