@@ -6,7 +6,7 @@ function widget:GetInfo()
     date      = "Mar 2011, 2011",
     license   = "horses. horses everywhere.",
     layer     = -3,
-    enabled   = true
+    enabled   = false
   }
 end
 
