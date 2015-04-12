@@ -11,7 +11,7 @@ function widget:GetInfo()
 end
 
 local DspLst=nil
-local res = 75			--75  50 to 200, multiple of 8 work better eg 64
+local res = 32			--75  50 to 200, multiple of 8 work better eg 64
 local TileMaxX = Game.mapSizeX/res +1
 local TileMaxZ = Game.mapSizeZ/res +1
 local unexplored = 0
@@ -67,8 +67,6 @@ end
 local function SetColor(x, z)
 	if (FOG[x][z] == unexplored) then
 		gl_Color(0, 0, 0, fogAlpha)
-	elseif (FOG[x][z] == explored) then
-		gl_Color(0, 0, 0, fogAlpha / 2)
 	else
 		gl_Color(0, 0, 0, 0)
 	end
@@ -107,7 +105,6 @@ local function TilesVertices(h)
 			if (FOG[x][z]~=nil) then
 				if (FOG[x][z] == unexplored) then gl_Color(0,0,0,fogAlpha) end
 				--if (FOG[x][z] == visible) then gl_Color(0,0,0,0) end
-				if (FOG[x][z] == explored) then gl_Color(0,0,0,fogAlpha/2) end
 				if (FOG[x][z] ~= visible) then
 				--if (x > TileMaxX or z > TileMaxZ) then 
 				local a = math.random (0,10)/10
