@@ -33,7 +33,6 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeamID, _, _, _, _, attackerI
         -- the current target poses no threat, switch to the attacker
         if zombie.target == nil or UnitDefs[zombie.target].customParams.civilian then
             Spring.GiveOrderToUnit(unitID, CMD.FIGHT, {attackerID}, {})
-            -- attack the attacker
         end
     end
 end
@@ -65,10 +64,10 @@ function gadget:GameFrame(n)
         return
     end
 
-    for zombieID, _ in pairs(zombies) do
+    for zombieID, zombie in pairs(zombies) do
         local zombieTeamID = Spring.GetUnitTeam(zombieID)
 
-        local x, _, z = Spring.GetUnitPosition(zombieID)
+        local x, y, z = Spring.GetUnitPosition(zombieID)
         local nearbyUnits = Spring.GetUnitsInCylinder(x, z, params.ZOM_ATTACK_RADIUS)
         local potentialTargets = {}
         for _, unitID in pairs(nearbyUnits) do
@@ -105,47 +104,38 @@ function gadget:GameFrame(n)
             end
             Spring.Log(LOG_SECTION, LOG_LEVEL, "zombie fight target", zombieID, bestUnitID)
             Spring.GiveOrderToUnit(zombieID, CMD.FIGHT, {bestUnitID}, {})
+        -- nothing to attack, so maybe wander around if idle?
+        elseif Spring.GetUnitCommands(zombieID, 0) == 0 then
+            Spring.Log(LOG_SECTION, LOG_LEVEL, "zombie is bored", zombieID)
+            -- zombie should try to be anchored to the original position so he doesn't wander too far away
+            if zombie.orig == nil and not zombie.wandering then
+                zombie.orig = { x=x, y=y, z=z }
+            end
+            zombie.wandering = false
+            -- calculate the time of the wander if not set
+            if zombie.wanderTime == nil then
+                zombie.wanderTime = Spring.GetGameFrame() + math.random(params.ZOM_MAX_IDLE_TIME - params.ZOM_MIN_IDLE_TIME) + params.ZOM_MIN_IDLE_TIME
+            -- check if it's time to start wandering around
+            elseif Spring.GetGameFrame() > zombie.wanderTime then
+                Spring.Log(LOG_SECTION, LOG_LEVEL, "bored zombie gets fight order", zombieID)
+                -- randomize the wander position and reset the time
+                local dx = math.random(params.ZOM_MAX_WANDER_RADIUS - params.ZOM_MIN_WANDER_RADIUS) + params.ZOM_MIN_WANDER_RADIUS
+                local dz = math.random(params.ZOM_MAX_WANDER_RADIUS- params.ZOM_MIN_WANDER_RADIUS) + params.ZOM_MIN_WANDER_RADIUS
+                if math.random(0, 1) > 0.5 then
+                    dx = -dx
+                end
+                if math.random(0, 1) > 0.5 then
+                    dz = -dz
+                end
+                Spring.GiveOrderToUnit(zombieID, CMD.FIGHT, {zombie.orig.x + dx, zombie.orig.y + y, zombie.orig.z + dz}, {})
+                zombie.wanderTime = nil
+                zombie.wandering = true
+            end
+        -- a zombie was given a real order, so clear the original position
+        elseif not zombie.wandering then
+            zombie.orig = nil
         end
     end
---     for unitID, fearTime in pairs(scaredUnits) do
---         Spring.Log(LOG_SECTION, LOG_LEVEL,"scaredUnits", unitID)
---         Spring.Log(LOG_SECTION, LOG_LEVEL,unitID, fearTime)
---         if scaredUnits[unitID] > 0 then
---             scaredUnits[unitID] = scaredUnits[unitID] - 1
---         else
---             GiveOrderToUnit(unitID, CMD_STOP, {}, {})
---             scaredUnits[unitID] = 0
---         end
---         local nearestEnemy = GetUnitNearestEnemy(unitID, CIV_AWARE_RADIUS, 0)
---         if nearestEnemy ~= nil then
---             local unitDefID = GetUnitDefID(nearestEnemy)
---             local ud = UnitDefs[unitDefID]
---             local zombie = ud.customParams.zombie
---             local civX, _, civZ = GetUnitPosition(unitID)
---             Spring.Log(LOG_SECTION, LOG_LEVEL,"enemy!", zombie)
---             if zombie then
---                 local zomX, _, zomZ = GetUnitPosition(nearestEnemy)
---                 local zombieTeam = GetUnitTeam(nearestEnemy)
---                 Spring.Log(LOG_SECTION, LOG_LEVEL,"aiee a zombie!")
---                 --Flee(zomX, zomZ, unitID, zombieTeam)
---             else
---                 local guardTeam = GetUnitTeam(nearestEnemy)
---                 if (scaryTeams[guardTeam]) then
---                     if (scaryTeams[guardTeam] > 0) then
---                         local enemyX,_,enemyZ = GetUnitPosition(nearestEnemy)
---                         Spring.Log(LOG_SECTION, LOG_LEVEL,"they're the ones who shot at us!")
---                         --Flee(enemyX, enemyZ, unitID, guardTeam)
---                     else
---                         --TODO: update this to check for a team's actual retreat zone
---                         local px, py, pz = GetTeamStartPosition(guardTeam)
---                         if scaredUnits[unitID] == 0 then
---                             GiveOrderToUnit(unitID, CMD_MOVE, {px, py, pz}, {})
---                         end
---                     end
---                 end
---             end
---         end
---     end
 end
 
 end
