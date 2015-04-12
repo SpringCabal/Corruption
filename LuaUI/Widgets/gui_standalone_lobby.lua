@@ -17,3 +17,8 @@ function widget:Initialize()
     gl.SlaveMiniMap(true)
     gl.ConfigMiniMap(-1,-1,-1,-1)
 end
+
+-- sets status to ready; avoiding any pre-game UI
+function widget:GameSetup()
+    return true, true
+end
