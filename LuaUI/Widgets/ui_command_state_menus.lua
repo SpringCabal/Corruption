@@ -1,5 +1,3 @@
--- WIP (excuse the mess)
---  TODO add build progress bar.
 function widget:GetInfo()
 	return {
 		name      = 'State & Command Menus',
@@ -116,8 +114,6 @@ local Hotkey = {
     ["cloak"] = "K",
     ["move"] = "M",
     ["resurrect"] = "O",
-    ["settarget"] = "Y", --set target
-    ["canceltarget"] = "J", --cancel target
 }
 ------------
 
@@ -340,7 +336,7 @@ local function parseCmds()
 		if cmd.name ~= '' and not (ignoreCMDs[cmd.name] or ignoreCMDs[cmd.action]) then
 			if #cmd.params > 1 then
 				states[cmd.action] = cmd
-			elseif cmd.id > 0 then -- hide the order menu if the open host list is showing (it shows to specs who have it enabled)
+			elseif cmd.id > 0 then
 				orderMenu.active = true
 				orders[cmd.action] = cmd
 			end
@@ -427,13 +423,11 @@ function widget:Initialize()
 	resizeUI(vsx,vsy)
 end
 
--- FIXME, never called wtf?
 function widget:CommandsChanged()
 	updateRequired = true
 end
 
 function widget:Update()
-	updateRequired = true --FIXME, see above
 	if updateRequired then
 		local r,g,b = Spring.GetTeamColor(Spring.GetMyTeamID())
 		teamColor = {r,g,b,0.8}
