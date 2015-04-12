@@ -32,7 +32,6 @@ local NewCmdDesc = {
 	type	= CMDTYPE.ICON_UNIT,
 	name	= 'NewCommand',
 	action	= 'someaction',
-	cursor	= 'cursorattack',
 	tooltip	= tooltipText,
 	hidden	= false,
 }
@@ -46,7 +45,6 @@ function gadget:Initialize()
 	for _, unitID in pairs(Spring.GetAllUnits()) do
 		gadget:UnitCreated(unitID, Spring.GetUnitDefID(unitID), Spring.GetUnitTeam(unitID))
 	end
-
 end
 
 function gadget:UnitCreated(unitID, unitDefID, unitTeam, builderID)
@@ -86,9 +84,21 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
             local unitHP, unitMaxHP = Spring.GetUnitHealth(unitID)
             Spring.SetUnitHealth(unitID, math.min(unitHP + amount, unitMaxHP))
         end
-        return true
+        return false
     end
     return true
+end
+
+
+
+else --UNSYNCED
+
+function gadget:Initialize()
+    -- register cursor
+	Spring.AssignMouseCursor("NewCommand", "cursorattack", true)
+	--show the command in the queue
+    local queueColour = {0.75, 0.1, 0.75, 0.7}
+	Spring.SetCustomCommandDrawData(NEW_COMMAND_ID,"NewCommand",queueColour,false)
 end
 
 end
