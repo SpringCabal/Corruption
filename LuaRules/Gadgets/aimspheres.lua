@@ -15,7 +15,6 @@ if (gadgetHandler:IsSyncedCode()) then
 
 
 function gadget:UnitCreated(unitID, unitDefID, unitTeam, builderID)
-    Spring.Echo(unitID)
     local p1, p2, p3 = Spring.GetUnitCollisionVolumeData(unitID)
     Spring.SetUnitRadiusAndHeight(unitID, 1, 1)
     Spring.SetUnitMidAndAimPos(unitID, 0, 25, 0, 0, 25, 0, true)
