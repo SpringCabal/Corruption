@@ -51,6 +51,13 @@ function gadget:UnitCreated(unitID, unitDefID, teamID)
 	end
 end
 
+function gadget:UnitIdle(unitID, unitDefID, unitTeam)
+    local zombie = zombies[unitID]
+    if zombie ~= nil then
+        
+	end
+end
+
 function gadget:Initialize()
     for _, unitID in ipairs(Spring.GetAllUnits()) do
         if UnitDefs[Spring.GetUnitDefID(unitID)].customParams.zombie then
