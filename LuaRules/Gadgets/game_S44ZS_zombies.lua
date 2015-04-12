@@ -17,9 +17,7 @@ if (gadgetHandler:IsSyncedCode()) then
 --  SYNCED
 --------------------------------------------------------------------------------
 
-local function InRadius(x1, z1, x2, z2, radius)
-    return (math.abs(x1-x2) < radius or math.abs(z1-z1) < radius)
-end
+local params = VFS.Include("LuaRules/header/sharedParams.lua")
 
 local LOG_SECTION = "zombie"
 local LOG_LEVEL = LOG.DEBUG
@@ -67,6 +65,48 @@ function gadget:GameFrame(n)
         return
     end
 
+    for zombieID, _ in pairs(zombies) do
+        local zombieTeamID = Spring.GetUnitTeam(zombieID)
+
+        local x, _, z = Spring.GetUnitPosition(zombieID)
+        local nearbyUnits = Spring.GetUnitsInCylinder(x, z, params.ZOM_ATTACK_RADIUS)
+        local potentialTargets = {}
+        for _, unitID in pairs(nearbyUnits) do
+            if Spring.GetUnitTeam(unitID) ~= zombieTeamID and not Spring.GetUnitNeutral(unitID) and not Spring.GetUnitIsDead(unitID) then
+                table.insert(potentialTargets, { 
+                    unitID = unitID, 
+                    pos = {Spring.GetUnitPosition(unitID)}
+                })
+            end
+        end
+        Spring.Log(LOG_SECTION, LOG_LEVEL, "potential zombie targets", #potentialTargets)
+        if #potentialTargets > 0 then
+            local bestValue = -math.huge
+            local bestUnitID
+            for _, target in pairs(potentialTargets) do
+                local tx, tz = target.pos[1], target.pos[3]
+                local d = (tx - x) * (tx - x) + (tz - z) * (tz - z)
+                -- we avoid using sqrt here by squaring the min attack radius instead
+                d = math.max(params.ZOM_MIN_ATTACK_RADIUS * params.ZOM_MIN_ATTACK_RADIUS, d)
+                local weight = 1
+                local targetDef = UnitDefs[Spring.GetUnitDefID(target.unitID)]
+                if target.kid and target.civilian then
+                    weight = params.ZOM_WEIGHT_CIVILIAN_KID
+                elseif target.civilian then
+                    weight = params.ZOM_WEIGHT_CIVILIAN
+                elseif target.player then
+                    weight = params.ZOM_WEIGHT_PLAYER
+                end
+                local value = weight / d
+                if value > bestValue then
+                    bestValue = value
+                    bestUnitID = target.unitID
+                end
+            end
+            Spring.Log(LOG_SECTION, LOG_LEVEL, "zombie fight target", zombieID, bestUnitID)
+            Spring.GiveOrderToUnit(zombieID, CMD.FIGHT, {bestUnitID}, {})
+        end
+    end
 --     for unitID, fearTime in pairs(scaredUnits) do
 --         Spring.Log(LOG_SECTION, LOG_LEVEL,"scaredUnits", unitID)
 --         Spring.Log(LOG_SECTION, LOG_LEVEL,unitID, fearTime)

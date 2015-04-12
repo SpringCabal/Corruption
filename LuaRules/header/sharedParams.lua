@@ -1,90 +1,21 @@
-local modOptions = Spring.GetModOptions()
-local framesPerSecond = 30
-local framesPerMinute = 60*framesPerSecond
-
---note, any typos in this file will crash pretty much everything.
-
 local params = {	
-	--NOTE: all of these times are stored in frames, so for printing stuff out they need to be
-	--converted back to seconds/minutes.
-	--how long does the objective period (before reinforcement wave) last?
-	OBJECTIVE_PHASE_LENGTH		= (tonumber(modOptions.objective_phase_length) or 10)*framesPerMinute,
+    -- how far around will zombies consider targets for attacking
+    ZOM_ATTACK_RADIUS            = 190,
+    -- below which range all targets will be considered to be in melee
+    ZOM_MIN_ATTACK_RADIUS        = 40,
+    ZOM_WEIGHT_CIVILIAN          = 1,
+    ZOM_WEIGHT_CIVILIAN_KID      = 1.5,
+    ZOM_WEIGHT_PLAYER            = 1.2,
 
-	--how often do new civilians/zombies spawn in?
-	RESPAWN_PERIOD				= (tonumber(modOptions.respawn_period) or 1)*framesPerMinute,
-	
-	--how much advance warning do players get for civilain spawns?
-	CIV_SPAWN_WARNINGTIME		= (tonumber(modOptions.respawn_period) or 1)*framesPerMinute,
-	
-	--how many zombies/civilians are spawned each RESPAWN_PERIOD?
-	ZOMBIE_COUNT 				= tonumber(modOptions.zombie_count) or 5,
-	CIVILIAN_COUNT				= tonumber(modOptions.civilian_count) or 15,
-	
-	--money settings (shockingly, max_money should be > initial cash, or players will only get max_money)
-	INITIAL_CASH				= tonumber(modOptions.initial_cash) or 50000,
-	MAX_MONEY					= 100000,
-	
-	--objective settings
-		--# civilians saved
-	CIVILIAN_SAVE_GOAL			= tonumber(modOptions.civilian_goal) or 50, 
-		--#hot zones destroyed
-	HOT_ZONE_GOAL				= tonumber(modOptions.hot_zone_goal) or 4, 
-		--#seconds of control
-	FLAG_HOLD_GOAL				= tonumber(modOptions.flag_hold_goal) or 600, 	
-		--number of flags to control on the map
-	FLAG_HOLD_POSITIONS			= tonumber(modOptions.flag_hold_positions) or 3,
-	
-	--how long does it take the objective winner's reinforcements to arrive?
-	REINFORCEMENT_DELAY			= (60)*framesPerSecond, --seconds
-	
-	--how long does a team that remains on map to contend for epic win have to stay before they're allowed to retreat?
-	NO_RETREAT_PERIOD			= (2)*framesPerMinute, --minutes
-
-	--corpse settings 
-		--what's the upper limit for infantry corpses spawned from a wrecked veh/tank
-		--min possible is 0 atm
-	MAX_VEH_CORPSES				= 5, 
-		--what's the radius where zombies can raise the dead
-	ZOMBIFICATION_RADIUS		= 80,
-	
-	--prizes! What do players get for accomplishing various tasks
-		--lost the objective stage, but defeated the huge wave of reinforcements
-	PRIZE_EPIC_WIN				= 75000,
-		--won the objective stage and then won the game with the reinforcements
-	PRIZE_OBJECTIVE_WIN			= 35000,
-		--both human players were killed or retreated before the objective round ended
-	PRIZE_HUMANS_GONE			= 15000,
-		--for completing various mini-goals (saved civvie, purged a hot zone, killed a zombie)
-	PRIZE_CIVILIAN_SAVE			= 150,
-	PRIZE_FLAG_CONTROL			= 85,
-	PRIZE_HOT_ZONE_PURGE		= 1500,
-	PRIZE_ZOMBIE_KILL			= 100,
-	
-	FLAG_CONTROL_REWARD_INTERVAL = 10, --every X seconds of flag control a team will get the above reward
-		--zombie income settings
-	PRIZE_HUMAN_KILL			= 0, --zombies get a 'bounty' added to this value for killing human units
-	ZOM_BOUNTY_MULT				= 0.50, --which is unit metal cost * this mult
-	
-	--initialize values
-		--a player's logistics at the start of a game
-	LOGISTICS_RESERVE			= tonumber(modOptions.logistics_reserve) or 1500,
-	
 	--civilian behavior settings
-		--how far around them civilians are aware of things happening 
-		--(like civilians dying, zombies approaching, etc).
+    --how far around them civilians are aware of things happening 
+    --(like civilians dying, zombies approaching, etc).
 	CIV_AWARE_RADIUS			= 100,
-		--how long civvies run from zombies before reevaluating
+    --how long civvies run from zombies before reevaluating
 	CIV_FEAR_DURATION			= 5,
-		--how long civvies run from a team that shot at them
+    --how long civvies run from a team that shot at them
 	CIV_TEAM_FEAR_DURATION		= 15,
-	
-	--for house placer - probably don't need to touch unless something seems borked
-	HOUSE_FEATURE_CHECK_RADIUS	= 300,
-		--how far away from the center spot coordinates houses can be spawned
-	HOUSE_SPOT_RADIUS			= 150,
-		--the minimum distance any house cluster will be from a team start point.
-	SPAWN_BUFFER				= 800,
-	
+
 }
 
 
