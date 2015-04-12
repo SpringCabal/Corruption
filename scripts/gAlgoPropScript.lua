@@ -29,7 +29,7 @@ bloks[i]=piece(temp)
 end
 hideT(pod)
 hideT(bloks)
-dist=26
+dist=20
 disto=16
 cgPosX,cgPosY,cgPosZ=0,0,0
 
@@ -76,16 +76,18 @@ Turn(bloks[nrBlok],y_axis,math.rad(d),0)
 	for i=1,5,1 do
 	
 	
-	d=table.getn(freeSpots)+1
-	x,y,z=byNr(i)
 	
-	freeSpots[d]={}
-	freeSpots[d][1]={}
-	freeSpots[d][1]=cgPosX+x
-	freeSpots[d][2]={}
-	freeSpots[d][2]=cgPosY+y
-	freeSpots[d][3]={}
-	freeSpots[d][3]=cgPosZ+z
+	x,y,z=byNr(i)
+		if doesSpotAllreadyExist(cgPosX+x,cgPosY+y,cgPosZ+z)==false then
+		d=table.getn(freeSpots)+1
+		freeSpots[d]={}
+		freeSpots[d][1]={}
+		freeSpots[d][1]=cgPosX+x
+		freeSpots[d][2]={}
+		freeSpots[d][2]=cgPosY+y
+		freeSpots[d][3]={}
+		freeSpots[d][3]=cgPosZ+z
+		end
 	end
 nrOfSpots=nrOfSpots+5
 
@@ -95,6 +97,12 @@ nrOfSpots=nrOfSpots-1
 
 end
 
+function doesSpotAllreadyExist(x,y,z)
+for i=1,#freeSpots do
+if freeSpots[i][1]==x and freeSpots[i][2]==y and freeSpots[i][3]==z then return true end
+end
+return false
+end
 nrOfSpots=5
 
 function clamp(min, val, max)
@@ -102,7 +110,7 @@ if val < min then return min end
 if val > max then return max end
 return val
 end
-
+usedSpots={}
 function addABrick()
 d=clamp(1,lib_deMaRaVal(table.getn(bloks)),table.getn(bloks))
 getAPod=clamp(1,lib_deMaRaVal(nrOfSpots),nrOfSpots)
@@ -110,16 +118,16 @@ getAPod=clamp(1,lib_deMaRaVal(nrOfSpots),nrOfSpots)
 moveCGAndAdPods(freeSpots[getAPod][1],freeSpots[getAPod][2],freeSpots[getAPod][3],getAPod,d)
 end
 function buildthis()
-
-	for i=1,table.getn(bloks),1 do
+	upLim=30 +lib_deMaRaVal(table.getn(bloks)-30)
+	for i=1,upLim,1 do
 	addABrick()
 	end
-
+Move(center,y_axis,15,0)
 end
 
 function script.Create()
 Hide(cg)
-Move(center,y_axis,15,0)
+
 	
 for i=1,5,1 do
 Hide(pod[i])
