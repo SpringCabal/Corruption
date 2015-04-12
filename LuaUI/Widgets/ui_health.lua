@@ -10,13 +10,9 @@ function widget:GetInfo()
 		enabled = true,
 	}
 end
--------------------------------------------
--- Chili vars
--------------------------------------------
-local Chili, window0
--------------------------------------------
--- Local vars
--------------------------------------------
+
+local Chili, window
+
 local spGetTeamnameources = Spring.GetTeamnameources
 local spGetMyTeamID      = Spring.GetMyTeamID
 local myTeamID = spGetMyTeamID()
@@ -29,18 +25,12 @@ local meter = {}
 local playerUnitID
 
 -------------------------------------------
--- Main
--------------------------------------------
+
 local function initWindow()
 	local screen0 = Chili.Screen0
 	
 	window = Chili.Panel:New {
 		parent    = screen0,
-		x         = "35%",
-		bottom    = 10, 
-		width     = "15%",
-		height    = 60, 
-		minHeight = 20, 
 		padding   = {0,0,0,0},
 	}
 
@@ -80,6 +70,13 @@ local function makeBar(name)
 end
 
 
+local function resizeUI(vsx,vsy)
+    window:SetPos(vsx*0.35, vsy*(1-0.05-0.01), vsx*0.17, vsy*0.05) 
+end
+function widget:ViewResize(vsx,vsy)
+	resizeUI(vsx,vsy)
+end
+
 -- Updates 
 local function SetBarValue(name,value,maxValue)
 	meter[name]:SetValue(value)
@@ -89,6 +86,7 @@ end
 function SetBarColor(name,r,g,b,a)
     meter[name]:SetColor(0.2,1.0,0.2,a)
 end
+
 -------------------------------------------
 -- Callins
 -------------------------------------------
@@ -125,6 +123,9 @@ function widget:Initialize()
     if Spring.GetGameFrame()>0 then
         updateHealthBar()
     end
+    
+    local vsx,vsy = Spring.GetViewGeometry()
+    resizeUI(vsx,vsy)
 end
 
 

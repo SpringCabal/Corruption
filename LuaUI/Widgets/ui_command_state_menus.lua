@@ -163,13 +163,13 @@ end
 
 local function resizeUI(vsx,vsy)
 	local ordH = vsy * 0.05
-	local ordY = vsy - ordH
+	local ordY = vsy - ordH - vsy*0.01
 	local winY = vsy * 0.2
 	local winH = vsy * 0.5
     
-	orderMenu:SetPos(50,ordY,ordH*21,ordH)
-	orderBG:SetPos(50,ordY,ordH*#orderMenu.children,ordH)
-	stateMenu:SetPos(50,0,200,winY)
+	orderMenu:SetPos(vsx*0.01,ordY,ordH*21,ordH)
+	orderBG:SetPos(vsx*0.01,ordY,ordH*#orderMenu.children,ordH)
+	stateMenu:SetPos(vsx*0.01,vsy*0.01,200,winY)
 end
 
 function widget:ViewResize(vsx,vsy)
