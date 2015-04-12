@@ -10,7 +10,6 @@ local BaseHuman = Unit:New{
 
     pushResistant       = true,
     collisionVolumeScales   = '37 40 37',
-    collisionVolumeOffsets  = '0 25 0',
     collisionVolumeTest     = 1,
     collisionVolumeType     = 'CylY',
 	-- corpse				= "<SIDE>soldier_dead",
