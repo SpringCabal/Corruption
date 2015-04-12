@@ -3,7 +3,7 @@ function widget:GetInfo()
 	return {
 		name    = 'Health Bar',
 		desc    = 'Displays players health bar',
-		author  = 'Bluestone, Funkencool',
+		author  = 'gajop, Bluestone, Funkencool',
 		date    = 'April, 2015',
 		license = 'GNU GPL v2',
         layer = 0,
@@ -22,7 +22,7 @@ local spGetMyTeamID      = Spring.GetMyTeamID
 local myTeamID = spGetMyTeamID()
 
 local images = {
-	health  = 'luaui/images/heart.png',
+	Health  = 'luaui/images/heart.png',
 }
 
 local meter = {}
@@ -34,11 +34,11 @@ local playerUnitID
 local function initWindow()
 	local screen0 = Chili.Screen0
 	
-	window = Chili.Panel:New{
+	window = Chili.Panel:New {
 		parent    = screen0,
-		right     = 0, 
-		y         = 0, 
-		width     = 400, 
+		x         = "35%",
+		bottom    = 10, 
+		width     = "15%",
 		height    = 60, 
 		minHeight = 20, 
 		padding   = {0,0,0,0},
@@ -83,8 +83,8 @@ end
 -- Updates 
 local function SetBarValue(name,value,maxValue)
 	meter[name]:SetValue(value)
-    meter[name]:SetMinMax(0,maxValue)
-	meter[name]:SetCaption(tostring(math.floor(value))..'/'..tostring(math.floor(maxValue)))
+    meter[name]:SetMinMax(0, maxValue)
+	meter[name]:SetCaption(tostring(math.floor(value)) .. '/' .. tostring(math.floor(maxValue)))
 end
 function SetBarColor(name,r,g,b,a)
     meter[name]:SetColor(0.2,1.0,0.2,a)
@@ -94,16 +94,19 @@ end
 -------------------------------------------
 
 function updateHealthBar()
-    -- FIXME, recognize players units
     if not playerUnitID or not Spring.ValidUnitID(playerUnitID) then 
-        local units = Spring.GetAllUnits()
-        playerUnitID = units[1]
+        for _, unitID in ipairs(Spring.GetAllUnits()) do
+            if UnitDefs[Spring.GetUnitDefID(unitID)].customParams.player then
+                playerUnitID = unitID
+            end
+        end
         if not Spring.ValidUnitID(playerUnitID) then return end
     end
     
-    local h,mh = Spring.GetUnitHealth(playerUnitID)
-    SetBarValue('health', h, mh)
-    SetBarColor('health', 0.2+0.75*(1-h/mh), 0.2+0.75*h/mh, 0.2,0.8)
+    local h, mh = Spring.GetUnitHealth(playerUnitID)
+    h = math.max(0, h)
+    SetBarValue('Health', h, mh)
+    SetBarColor('Health', 0.2+0.75*(1-h/mh), 0.2+0.75*h/mh, 0.2,0.8)
 end
 
 function widget:GameFrame(n)
@@ -118,7 +121,7 @@ function widget:Initialize()
 	Spring.SendCommands('resbar 0')
 	Chili = WG.Chili
 	initWindow()
-	makeBar('health')
+	makeBar('Health')
     if Spring.GetGameFrame()>0 then
         updateHealthBar()
     end
