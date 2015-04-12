@@ -397,7 +397,7 @@ function ConfigureLayout(xIcons, yIcons, cmdCount, commands)
 end
 
 function widget:Initialize()
-	--widgetHandler:ConfigLayoutHandler(LayoutHandler) -- FIXME
+	--widgetHandler:ConfigureLayout(LayoutHandler) -- FIXME
 	Spring.ForceLayoutUpdate()
 	spSendCommands({'tooltip 0'})
     
@@ -464,7 +464,7 @@ function widget:GameStart()
 end
 
 function widget:Shutdown()
-	-- widgetHandler:ConfigLayoutHandler(nil) --FIXME
+	--widgetHandler:ConfigureLayout(nil) --FIXME
 	Spring.ForceLayoutUpdate()
 	
 	spSendCommands({'tooltip 1'})
