@@ -26,22 +26,8 @@ local images = {
 }
 
 local meter = {}
-
--- Colors
-local green        = {0.2, 1.0, 0.2, 1.0}
-local red          = {1.0, 0.2, 0.2, 1.0}
-local greenOutline = {0.2, 1.0, 0.2, 0.2}
-local redOutline   = {1.0, 0.2, 0.2, 0.2}
-local fullyLoaded = false -- to stop making "set X to Y" remarks when we are just reloading the config on init
-
 local playerUnitID
 
--------------------------------------------
--- Auxiliary functions
--------------------------------------------
-function format(num, idp)
-  return string.format("%." .. (idp or 0) .. "f", num)
-end
 -------------------------------------------
 -- Main
 -------------------------------------------
@@ -65,13 +51,24 @@ local function makeBar(name)
 	local control = Chili.Control:New{
 		parent    = window,
 		name      = name,
-		x         = 0,
+		x         = '10%',
 		y         = 0,
 		height    = '100%',
-		width     = '100%',
+		width     = '90%',
 		padding   = {10,10,10,10},
 	}
 	
+	Chili.Image:New{
+		parent = window,
+		file   = images[name],
+        name   = 'heart',
+		height = '100%',
+		width  = '8%',
+		x      = '3%', 
+		y      = 0, 
+        bottom = 0,
+	}
+
 	meter[name] = Chili.Progressbar:New{
 		parent = control, 
 		x      = 0, 
@@ -80,16 +77,6 @@ local function makeBar(name)
 		right  = 0,
 	}
 	
-    --[[
-	Chili.Image:New{
-		file   = image[name],
-		height = 24,
-		width  = 24,
-		x      = 86, 
-		y      = 3, 
-		parent = control
-	}
-    ]]
 end
 
 
