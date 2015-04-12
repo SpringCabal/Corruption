@@ -1,8 +1,8 @@
 local Dude = Civilian:New {
 	name				= "Dude",
     maxDamage           = 300,
-    collisionVolumeScales		= [[50 50 50]]
-    collisionVolumeOffsets	= [[0 25 0]]
+    collisionVolumeScales		= [[50 50 50]],
+    collisionVolumeOffsets	= [[0 25 0]],
 }
 
 local Dudette = Civilian:New {
