@@ -50,9 +50,7 @@ function addon.BlockAddon(name, knownInfo)
 	--end
 
 	if (not knownInfo.fromZip)and(knownInfo.enabled) then
-		local autoUserWidgets = (Spring.GetConfigInt('LuaAutoEnableUserWidgets', 0) ~= 0)
-		if (not autoUserWidgets) then
-			knownInfo.enabled = false
-		end
-	end
+		knownInfo.enabled = false
+        return true
+    end
 end
