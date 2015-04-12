@@ -81,7 +81,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
             end
             local targetHP = Spring.GetUnitHealth(targetUnitID)
             -- can't take more health than the unit has
-            amount = math.min(targetHP, amount)
+            amount = math.min(targetHP + 1, amount)
             Spring.SetUnitHealth(targetUnitID, targetHP - amount)
             local unitHP, unitMaxHP = Spring.GetUnitHealth(unitID)
             Spring.SetUnitHealth(unitID, math.min(unitHP + amount, unitMaxHP))
