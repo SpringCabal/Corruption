@@ -153,6 +153,9 @@ local gameStarted = (Spring.GetGameFrame()>0)
 ----------------
 
 local function getInline(r,g,b)
+    if not r then r = 1 end
+    if not g then g = 1 end
+    if not b then b = 1 end
 	if type(r) == 'table' then --fixme /0
 		return string.char(255, (r[1]*255), (r[2]*255), (r[3]*255))
 	else
@@ -337,7 +340,7 @@ local function parseCmds()
 		if cmd.name ~= '' and not (ignoreCMDs[cmd.name] or ignoreCMDs[cmd.action]) then
 			if #cmd.params > 1 then
 				states[cmd.action] = cmd
-			elseif cmd.id > 0 and not WG.OpenHostsList then -- hide the order menu if the open host list is showing (it shows to specs who have it enabled)
+			elseif cmd.id > 0 then -- hide the order menu if the open host list is showing (it shows to specs who have it enabled)
 				orderMenu.active = true
 				orders[cmd.action] = cmd
 			end
