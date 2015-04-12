@@ -4,31 +4,16 @@ include "toolKit.lua"
 
 
 bloks={}
-center=piece"center"
-cg=piece"CG"
+center=""
+cg=""
+
 pod={}
-pod[1]={}
-pod[1]=piece"Pod1"
-pod[2]={}
-pod[2]=piece"Pod2"
-pod[3]={}
-pod[3]=piece"Pod3"
-pod[4]={}
-pod[4]=piece"Pod4"
-pod[5]={}
-pod[5]=piece"Pod5"
 
 
 
 freeSpots={}
 
-for i=1,76,1 do
-bloks[i]={}
-temp="Blok"..i
-bloks[i]=piece(temp)
-end
-hideT(pod)
-hideT(bloks)
+
 dist=20
 disto=16
 cgPosX,cgPosY,cgPosZ=0,0,0
@@ -110,7 +95,7 @@ if val < min then return min end
 if val > max then return max end
 return val
 end
-usedSpots={}
+
 function addABrick()
 d=clamp(1,lib_deMaRaVal(table.getn(bloks)),table.getn(bloks))
 getAPod=clamp(1,lib_deMaRaVal(nrOfSpots),nrOfSpots)
@@ -126,6 +111,27 @@ Move(center,y_axis,15,0)
 end
 
 function script.Create()
+pod[1]={}
+pod[1]=piece"Pod1"
+pod[2]={}
+pod[2]=piece"Pod2"
+pod[3]={}
+pod[3]=piece"Pod3"
+pod[4]={}
+pod[4]=piece"Pod4"
+pod[5]={}
+pod[5]=piece"Pod5"
+center=piece"center"
+cg=piece"CG"
+
+for i=1,76,1 do
+bloks[i]={}
+temp="Blok"..i
+bloks[i]=piece(temp)
+end
+
+hideT(pod)
+hideT(bloks)
 Hide(cg)
 
 	
