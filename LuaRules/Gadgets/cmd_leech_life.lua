@@ -76,7 +76,7 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
           
     -- TODO: recalc corruption & tell LuaUI
     
-    return true -- action the command instantly (from the users point of view, skip the command queue)
+    return false -- (from the users point of view, action the command instantly; from the engines point of view, block it)
 end
 
 
