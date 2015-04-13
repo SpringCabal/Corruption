@@ -74,10 +74,9 @@ function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdO
     Spring.SetUnitHealth(targetUnitID, targetHP - amount)
     Spring.SetUnitHealth(unitID, math.min(unitHP + amount, unitMaxHP))
           
-    -- tell LuaUI
-    -- TODO
-
-    return false
+    -- TODO: recalc corruption & tell LuaUI
+    
+    return true -- action the command instantly (from the users point of view, skip the command queue)
 end
 
 
