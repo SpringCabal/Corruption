@@ -13,7 +13,14 @@ end
 function widget:Initialize()
     -- TODO: Use this line for release (disables the console)
     --Spring.SendCommands("ResBar 0", "ToolTip 0", "Console 0", "Clock 0", "Info 0")
+    
+    -- check if scenario editor is run in play mode
     Spring.SendCommands("ResBar 0", "ToolTip 0", "Clock 0", "Info 0")
+    local modOpts = Spring.GetModOptions()
+    local devMode = (tonumber(modOpts.play_mode) or 0) == 0
+    if not devMode then
+        Spring.SendCommands("Console 0")
+    end
     gl.SlaveMiniMap(true)
     gl.ConfigMiniMap(-1,-1,-1,-1)
 end
