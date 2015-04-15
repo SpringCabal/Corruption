@@ -2511,18 +2511,31 @@ end
 			 end
 	 return T
 	 end
+
+	 --> Creates by team a Table in the GlobalGame Table
+	 function insertIntoGlobalTable(unitid,name, value)
+	 teamid=Spring.GetUnitTeam(unitid)
+	 execString="GG."..name.."["..teamid.."]"
+	 insertString=execString.."["..unitid.."]"
+	 assignString=insertString.."="..value
+	 if not string.load(execString) then string.load(execString.."= {}") end	
+	 string.load(assignString)
+	 return string.load(insertString.."="..value)
+	 end
+
+
 	 
 	 --> Apply a function on a Table
-	function forTableUseFunction(Table,func,metafunc)
-	T={}
-		for i=1,#Table do
-		T[i]=func(Table[i])
-		end
-		if metafunc then
-		return metafunc(T)
-		else
+	function forTableUseFunction(T,...)
+	TempT={}
+	 for _, f in pairs(arg) do
+	
+			for i=1,#T do
+					 TempT[i]=f(T[i])
+			end
+			T=TempT
+	  end
 		return T
-		end
 	end
 
 	function getLowest(Table)
