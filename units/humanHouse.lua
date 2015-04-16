@@ -18,7 +18,7 @@ autoheal=10,
 --Movement
 mass=180020,
 upRight=true,
-blocking=false,
+blocking=true,
 pushResistant=true,
 
 FootprintX = 3,
