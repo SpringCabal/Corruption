@@ -36,8 +36,109 @@
 		end
 	end
 
+	-->make a GlobalTableHierarchy From a Set of Arguments - String= Tables, Numbers= Params
+	-->Example: TableContaining[key].TableReamining[key].valueName or [nr] , value
+	function makeCascadingGlobalTables(FormatString,assignedValue, ...)
+	if string.load(FormatString) ~= nil then FormatString=FormatString.."="..assignedValue; string.load(FormatString) return end
+	--SplitByDot
+	SubTables={}
+	--split that string
+	SubT=string.split(FormatString,".")
+		Appendix="GG."
+		boolAvoidFutureChecks=false
+		for i=1,#SubT do
+			if not SubT[i]=="GG" then 
+			SubT=string.gsub(SubT,".")
+			ExtracedIndex=string.match(SubT,"[","]")
+			ExtractedTable=string.gsub(SubT,ExtracedIndex,"")
+			Terminator="."
+			if ExtractedTable then
+				if boolAvoidFutureChecks==true or not string.load(Appendix..ExtractedTable) then 
+				string.load(Appendix..ExtractedTable.."= {}")
+				boolAvoidFutureChecks=true
+				end
+			else ExtractedTable="" ;Terminator=""end
+				if boolAvoidFutureChecks==true or ExtracedIndex and not string.load(Appendix..ExtractedTable..ExtracedIndex)  then
+				string.load(Appendix..ExtractedTable..ExtracedIndex.."={}")
+				end
+			
+			Appendix=Appendix..ExtractedTable..ExtracedIndex..Terminator
+			end
+		end
+		string.load(Appendix.."="..assignedValue)
+	return string.load(Appendix.."==".. asignedValue)
+	end
 
 
+-->Transformer OS: Assembles from SubUnits in Team a bigger Unit
+function assemble(center,unitid,udefSub,CubeLenghtSub, nrNeeded,range, AttachPoints)
+--Move UnderGround
+
+piecesTable=Spring.GetUnitPieceList(unitid)
+	for i=1,#piecesTable do
+	piecesTable[i]=piece(piecesTable[i])
+	end
+hideT(piecesTable)
+if AttachPoints then AttachPoints=sortPiecesByHeight(AttachPoints) else
+AttachPoints=sortPiecesByHeight(piecesTable)
+end
+indexP=1
+hx,hy,hz=spGetUnitPiecePosDir(untid,AttachPoints[indexP])
+base=Spring.GetGroundHeight(hx,hz)
+DistanceDown=base-hy
+Move(center,y_axis,DistanceDown,0)
+
+makeCascadingGlobalTables("BoundToThee")
+
+oldHP=Spring.GetUnitHealth(unitid)
+newHP=oldHP
+
+	while nrAdded < nrNeeded and Spring.GetUnitIsDead(unitid)==false do
+		Move(center,y_axis,DistanceDown*(nrAdded/nrNeeded),1.5)
+		--check VaryFoos around you
+		allSub={}
+		--check wether we are under Siege and send the Underlings not allready buildin
+		newHP=Spring.GetUnitHealth(unitid)
+		boolUnderAttack=oldHP > newHP
+		oldHP=newHP
+			if GG.InfoTable[unitid].boolUnderAttack==true then
+			--defend moma
+			ax,ay,az=Spring.GetUnitNearestEnemy(untid)
+			for i=1,#allSub do
+			if not GG.BoundToThee[allSub[i]] then
+					Spring.SetUnitMoveGoal(allSub[i],ax,ay,az)		
+			end
+			end
+	
+		else --build on
+		--get nextPiece above ground
+		attachP=AttachPoints[math.min(indexP,#AttachPoints)]
+		indexP=indexP+1
+		
+		x,y,z=Spring.GetUnitPiecePosDir(untid,attachP)
+			for i=1,#allSub do
+			
+				ux,uy,uz=Spring.GetUnitPosition(allSub[i])
+				if (ux-x) *(uy-y)* (uz-z) < 50 then --integrate it into the Avatara
+					if not GG.BoundToThee[allSub[i]] then
+					StartThread(partOfShipPartOfCrew, attachP, allSub[i])
+					end
+				else
+					Spring.SetUnitMoveGoal(allSub[i],x,y,z)	
+				end
+			end
+		end
+	
+	end
+	
+	GG.BoundToThee[unitid]=nil 
+	MoveCtrl.Enable(unitID,false)
+	boolBuildEnded=true
+	boolComplete=true
+		Move(center,y_axis,0,12)
+		showT(piecesTable)
+return true
+end
 
 --> Gadget:missionScript expects frame, the missionTable, which contains per missionstep the following functions
 -- e.g. [1]= {situationFunction(frame,TABLE,nr), continuecondtion(frame,TABLE,nr,boolsuccess), continuecondtion(frame,TABLE,nr,boolsuccess)}
@@ -3685,3 +3786,4 @@ end
 	
 	return T1,T2
 	end
+
