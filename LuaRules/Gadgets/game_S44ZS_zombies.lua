@@ -35,6 +35,13 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeamID, _, _, _, _, attackerI
             Spring.GiveOrderToUnit(unitID, CMD.FIGHT, {attackerID}, {})
         end
     end
+    -- stun civilians
+    if UnitDefs[unitDefID].customParams.civilian and zombies[attackerID] then
+        local _, paralyzeHealth = Spring.GetUnitHealth(unitID)
+        paralyzeHealth = paralyzeHealth * 1.02 + 1
+        Spring.Log(LOG_SECTION, LOG_LEVEL, "Paralyze civilian damage: ", paralyzeHealth)
+        Spring.SetUnitHealth(unitID, {paralyze=paralyzeHealth})
+    end
 end
 
 function gadget:TrackUnit(unitID)
