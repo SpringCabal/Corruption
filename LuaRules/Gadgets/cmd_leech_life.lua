@@ -1,3 +1,16 @@
+--[[
+Idea for implementing multiple spells with lua-magic:
+(1) Each spell is its own a custom CMD of type CMD.UNIT_ICON, which routes via AllowCommand to giving a CMD.ATTACK to that unit, inserted into Springs normal command queue.
+(2) At the same time, for each targetID, the spells gadget saves a stack of spells.
+    If multiple spells are queued on the same target, they are added to the stack for that targetID but no extra CMD.ATTACK are issued.
+(3) When the CMD.ATTACK for targetID is actioned, the spell gadget checks the stack for that targetID, and spawns appropriate lups + actions the consequences.
+
+Consequences:
+(1) All spells must have the same radius, implemented as the weapon radius of the units single weapon
+   (this can't be avoided without implementing pathing mechanics ourselves, they are not built in for custom commands, also https://springrts.com/mantis/view.php?id=3900).
+(2) If the unit which casts the spells cannot has 'normal' attack weapon, it has to be implemented as a dummy spell and have the same radius as the spells.
+]] 
+
 
 function gadget:GetInfo()
   return {
