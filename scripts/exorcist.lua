@@ -91,6 +91,11 @@ function PlayAnimation(animname)
     end
 end
 
+--loadstring(VFS.LoadFile("scripts/exorcist_idle.lua"))()
+local animation = VFS.Include("scripts/exorcist_idle.lua")
+Animations[animation[1]] = animation[2]
+
+
 function script.Create()
     local map = Spring.GetUnitPieceMap(unitID);
     local offsets = constructSkeleton(unitID,map.Scene, {0,0,0});
@@ -108,6 +113,7 @@ function script.Create()
             end
         end
     end
+    PlayAnimation("idle")
 end
             
 function script.Killed(recentDamage, maxHealth)
