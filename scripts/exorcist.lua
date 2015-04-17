@@ -111,7 +111,7 @@ function script.Create()
             end
         end
     end
-    PlayAnimation("idle")
+    --PlayAnimation("idle")
 end
             
 function script.Killed(recentDamage, maxHealth)
@@ -120,11 +120,11 @@ end
 
 ----aiming & fire weapon
 function script.AimFromWeapon1() 
-    return head
+    return pelvis
 end
 
 function script.QueryWeapon1() 
-    return head
+    return pelvis
 end
 
 function script.AimWeapon1(Heading, pitch)
@@ -145,9 +145,9 @@ function script.Deactivate()
 end
 
 function script.QueryBuildInfo()
-    return head 
+    return pelvis 
 end
 
 function script.QueryNanoPiece()
-    return head
+    return pelvis
 end
