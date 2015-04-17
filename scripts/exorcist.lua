@@ -110,7 +110,7 @@ function script.Create()
             end
         end
     end
-    --PlayAnimation("idle")
+    PlayAnimation("idle")
 end
             
 function script.Killed(recentDamage, maxHealth)
