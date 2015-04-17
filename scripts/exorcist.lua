@@ -91,8 +91,7 @@ function PlayAnimation(animname)
     end
 end
 
-VFS.Include("scripts/exorcist_idle.lua")
-
+Animations['idle'] = VFS.Include("scripts/exorcist_idle.lua")
 
 function script.Create()
     local map = Spring.GetUnitPieceMap(unitID);

@@ -1,5 +1,26 @@
+local armleft = piece('armleft');
+local armright = piece('armright');
+local Empty = piece('Empty');
+local footleft = piece('footleft');
+local footright = piece('footright');
+local forearmleft = piece('forearmleft');
+local forearmright = piece('forearmright');
+local handleft = piece('handleft');
+local handright = piece('handright');
+local head = piece('head');
+local kneeleft = piece('kneeleft');
+local kneeright = piece('kneeright');
+local pelvis = piece('pelvis');
+local staff = piece('staff');
+local thighleft = piece('thighleft');
+local thighright = piece('thighright');
+local torso = piece('torso');
 
-Animations['idle'] = {
+local x_axis = 1
+local y_axis = 2
+local z_axis = 3
+
+return {
 	{
 		['time'] = 0,
 		['commands'] = {
@@ -59,6 +80,7 @@ Animations['idle'] = {
 	{
 		['time'] = 1,
 		['commands'] = {
+			{['c']='turn',['p']=thighright, ['a']=z_axis, ['t']=0.000007, ['s']=0.000000},
 		}
 	},
 }
