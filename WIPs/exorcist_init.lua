@@ -1,33 +1,3 @@
--- include "toolKit.lua"
--- corUptionCounter=0
--- timeNeededCounter=9000
--- teamid=Spring.GetUnitTeam(unitID)
--- insertIntoGlobalTable(unitID,"ExoCoruptionLevel",0)
--- function BuffCurseFunction()
--- local val =GG.ExoCoruptionLevel[teamid][unitID]
--- --GetValueLevel
--- 
--- --CorruptUnit
--- 
--- --or free Civilian
--- 
--- end
-
--- function closeCombatRoundHouseKick(weaponRange,damage,boolFriendlyFire)
--- x,y,z=Spring.GetUnitPosition(unitID)
--- T=grabEveryone(unitID,x,z,weaponRange)
--- 	if T then
--- 	T=forTableUseFunction(T,
--- 						function(id) ux,uy,uz=Spring.GetUnitPosition(id);
--- 									Spring.SpawnCEG("dust",ux,uy+15,uz,0,0,20);
--- 									ux,uy,uz=x-ux,y-uy,z-uz;
--- 									Spring.AddUnitImpulse(id,ux,uy,uz);
--- 									end,
--- 						function(id) Spring.AddUnitDamage(id,damage) end,
--- 						
--- 	end
--- end
-
 local armleft = piece('armleft');
 local armright = piece('armright');
 local Empty = piece('Empty');
@@ -74,22 +44,6 @@ function constructSkeleton(unit, piece, offset)
     end        
     return bones;
 end
-       
-local animCmd = {['turn']=Turn,['move']=Move};
-function PlayAnimation(animname)
-    local anim = Animations[animname];
-    for i = 1, #anim do
-        local commands = anim[i].commands;
-        for j = 1,#commands do
-            local cmd = commands[j];
-            animCmd[cmd.c](cmd.p,cmd.a,cmd.t,cmd.s);
-        end
-        if(i < #anim) then
-            local t = anim[i+1]['time'] - anim[i]['time'];
-            Sleep(t*33); -- sleep works on milliseconds
-        end
-    end
-end
 
 function script.Create()
     local map = Spring.GetUnitPieceMap(unitID);
@@ -110,40 +64,19 @@ function script.Create()
     end
 end
             
-function script.Killed(recentDamage, maxHealth)
-    return 1
+local animCmd = {['turn']=Turn,['move']=Move};
+function PlayAnimation(animname)
+    local anim = Animations[animname];
+    for i = 1, #anim do
+        local commands = anim[i].commands;
+        for j = 1,#commands do
+            local cmd = commands[j];
+            animCmd[cmd.c](cmd.p,cmd.a,cmd.t,cmd.s);
+        end
+        if(i < #anim) then
+            local t = anim[i+1]['time'] - anim[i]['time'];
+            Sleep(t*33); -- sleep works on milliseconds
+        end
+    end
 end
-
-----aiming & fire weapon
-function script.AimFromWeapon1() 
-    return head
-end
-
-function script.QueryWeapon1() 
-    return head
-end
-
-function script.AimWeapon1(Heading, pitch)
-    --aiming animation: instantly turn the gun towards the enemy
-    return true
-end
-
-function script.FireWeapon1()
-    return true
-end
-
-function script.Activate()
-    return 1
-end
-
-function script.Deactivate()
-    return 0
-end
-
-function script.QueryBuildInfo()
-    return head 
-end
-
-function script.QueryNanoPiece()
-    return head
-end
+            
