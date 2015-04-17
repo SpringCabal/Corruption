@@ -45,7 +45,7 @@ local staff = piece('staff');
 local thighleft = piece('thighleft');
 local thighright = piece('thighright');
 local torso = piece('torso');
-local Animations = {};
+Animations = {};
 
 function constructSkeleton(unit, piece, offset)
     if (offset == nil) then
@@ -91,9 +91,7 @@ function PlayAnimation(animname)
     end
 end
 
---loadstring(VFS.LoadFile("scripts/exorcist_idle.lua"))()
-local animation = VFS.Include("scripts/exorcist_idle.lua")
-Animations[animation[1]] = animation[2]
+VFS.Include("scripts/exorcist_idle.lua")
 
 
 function script.Create()

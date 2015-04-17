@@ -1,6 +1,5 @@
 
-return {
-    'idle',
+Animations['idle'] = {
 	{
 		['time'] = 0,
 		['commands'] = {
